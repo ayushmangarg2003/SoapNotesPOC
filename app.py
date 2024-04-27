@@ -44,30 +44,34 @@ def get_response(input_prompt, transcript):
     return response.text
 
 # App
-st.set_page_config("Text Organiser")
+st.set_page_config("Text Organiser",layout='wide')
 st.header("Text Organiser")
 
-input_text = st.text_input("Give me the unorganised text")
+col1, col2 = st.columns(2)
 
-text = speech_to_text(
-    language='en',
-    start_prompt="Start Speaking",
-    stop_prompt="Stop",
-    just_once=False,
-    use_container_width=True,
-    callback=None,
-    args=(),
-    kwargs={},
-    key=None
-)
-if text:
-    input_text += text
-    st.write(text)
-submit = st.button("Organise")
+with col1:
+    input_text = st.text_area("Give me the unorganised text",  height=150)
 
+    text = speech_to_text(
+        language='en',
+        start_prompt="Start Speaking",
+        stop_prompt="Stop",
+        just_once=False,
+        use_container_width=True,
+        callback=None,
+        args=(),
+        kwargs={},
+        key=None
+    )
+    if text:
+        input_text += text
+        st.write(text)
+    submit = st.button("Organise")
 
-if submit:
-    response = get_response(input_prompt=input_prompt, transcript=input_text)
-    st.subheader("Result is:")
-    st.write(response)
+with col2:
+    if submit:
+        response = get_response(input_prompt=input_prompt, transcript=input_text)
+        st.subheader("Result is:")
+        st.write(response)
+
 
