@@ -1,0 +1,15 @@
+{
+  "name": "text_organizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": ".venv/bin/python app.py",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-venv": "python -m venv ./.venv",
+    "install-dependencies": ".venv/bin/pip install -r requirements.txt"
+
+  },
+  "author": "",
+  "license": "ISC"
+}
