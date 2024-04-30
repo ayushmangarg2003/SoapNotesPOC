@@ -9,7 +9,17 @@ load_dotenv()
 
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
-input_prompt=""" ou are an AI assistant that helps summarize doctor and patient conversations in a SOP format like below:
+def get_response(input_prompt, transcript):
+    model = genai.GenerativeModel('gemini-pro')
+    response = model.generate_content(input_prompt + transcript)
+    return response.text
+
+# App
+st.set_page_config("Text Organiser",layout='wide')
+st.header("Text Organiser")
+
+col1, col2 = st.columns(2)
+default_prompt=""" You are an AI assistant that helps summarize doctor and patient conversations in a SOP format like below:
 
 Subjective. The subjective part details the observation of a health care provider to a patient. This could also be the observations that are verbally expressed by the patient. some examples could be answers to questions like:
 
@@ -28,7 +38,6 @@ Objective. All measurable data such as vital signs, pulse rate, temperature, etc
 
 This section combines all the information gathered from the subjective and objective sections. It’s where you describe what you think is going on with the patient.
 
- 
 Assessment:
 You can include your impressions and your interpretation of all of the above information, and also draw from any clinical professional knowledge or DSM criteria/therapeutic models to arrive at a diagnosis (or list of possible diagnoses).
 
@@ -37,18 +46,6 @@ Plan. The plan refers to the treatment that the patient need or advised by the d
 The SOAP note must be concise and well-written. 
 
 Medical terminologies and jargon are allowed in the SOAP note.  """
-
-def get_response(input_prompt, transcript):
-    model = genai.GenerativeModel('gemini-pro')
-    response = model.generate_content(input_prompt + transcript)
-    return response.text
-
-# App
-st.set_page_config("Text Organiser",layout='wide')
-st.header("Text Organiser")
-
-col1, col2 = st.columns(2)
-
 with col1:
     input_text = st.text_area("Give me the unorganised text",  height=150)
 
@@ -66,11 +63,14 @@ with col1:
     if text:
         input_text += text
         st.write(text)
-    submit = st.button("Organise")
 
+    with st.expander("Edit Prompt"):
+        prompt = st.text_area("Prompt",  height=150, value=default_prompt)
+
+    submit = st.button("Organize")
 with col2:
     if submit:
-        response = get_response(input_prompt=input_prompt, transcript=input_text)
+        response = get_response(input_prompt=prompt, transcript=input_text)
         st.subheader("Result is:")
         st.write(response)
 
