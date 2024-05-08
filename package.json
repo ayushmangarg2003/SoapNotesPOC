@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": ".venv/bin/python app.py",
+    "dev-ui":".venv/bin/python -m streamlit run app.py",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install-venv": "python -m venv ./.venv",
-    "install-dependencies": ".venv/bin/pip install -r requirements.txt"
+    "install-dependencies": "python -m venv ./.venv && .venv/bin/pip install -r requirements.txt"
 
   },
   "author": "",
