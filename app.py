@@ -66,15 +66,15 @@ with col1:
     input_text = st.text_area("Give me the unorganised text",  height=150)
 
 
-    # audio = audiorecorder(start_prompt="Start recording", stop_prompt="Stop recording")
-    # if len(audio) > 0:
-    #     text = transcribe(audio.export("audio.mp3", format="mp3"))
-    #     st.write(text)
-
-    wav_audio_data = st_audiorec()
-    if wav_audio_data is not None:
-        text = transcribe(wav_audio_data)
+    audio = audiorecorder(start_prompt="Start recording", stop_prompt="Stop recording")
+    if len(audio) > 0:
+        text = transcribe(audio.export("audio.mp3", format="mp3"))
         st.write(text)
+
+    # wav_audio_data = st_audiorec()
+    # if wav_audio_data is not None:
+    #     text = transcribe(wav_audio_data)
+    #     st.write(text)
 
     with st.expander("Edit Prompt"):
         prompt = st.text_area("Prompt",  height=150, value=default_prompt)
