@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from st_audiorec import st_audiorec
-
 import whisper
 model = whisper.load_model("base")
 
@@ -64,17 +63,11 @@ The SOAP note must be concise and well-written.
 Medical terminologies and jargon are allowed in the SOAP note.  """
 with col1:
     input_text = st.text_area("Give me the unorganised text",  height=150)
-
-
-    audio = audiorecorder(start_prompt="Start recording", stop_prompt="Stop recording")
-    if len(audio) > 0:
-        text = transcribe(audio.export("audio.mp3", format="mp3"))
+    
+    wav_audio_data = st_audiorec()
+    if wav_audio_data is not None:
+        text = transcribe(wav_audio_data)
         st.write(text)
-
-    # wav_audio_data = st_audiorec()
-    # if wav_audio_data is not None:
-    #     text = transcribe(wav_audio_data)
-    #     st.write(text)
 
     with st.expander("Edit Prompt"):
         prompt = st.text_area("Prompt",  height=150, value=default_prompt)
