@@ -1,11 +1,27 @@
 import streamlit as st 
 import google.generativeai as genai
 import os
-from streamlit_mic_recorder import mic_recorder
-from streamlit_mic_recorder import speech_to_text
-
 from dotenv import load_dotenv
 load_dotenv()
+
+from st_audiorec import st_audiorec
+
+import whisper
+model = whisper.load_model("base")
+
+
+def transcribe(audio):
+    audio = whisper.load_audio(audio)
+    audio = whisper.pad_or_trim(audio)
+
+    mel = whisper.log_mel_spectrogram(audio).to(model.device)
+
+    _, probs = model.detect_language(mel)
+    st.write(f"Detected language: {max(probs, key=probs.get)}")
+
+    options = whisper.DecodingOptions()
+    result = whisper.decode(model, mel, options)
+    return result.text
 
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
@@ -49,29 +65,26 @@ Medical terminologies and jargon are allowed in the SOAP note.  """
 with col1:
     input_text = st.text_area("Give me the unorganised text",  height=150)
 
-    text = speech_to_text(
-        language='en',
-        start_prompt="Start Speaking",
-        stop_prompt="Stop",
-        just_once=False,
-        use_container_width=True,
-        callback=None,
-        args=(),
-        kwargs={},
-        key=None
-    )
-    if text:
-        input_text += text
+
+    # audio = audiorecorder(start_prompt="Start recording", stop_prompt="Stop recording")
+    # if len(audio) > 0:
+    #     text = transcribe(audio.export("audio.mp3", format="mp3"))
+    #     st.write(text)
+
+    wav_audio_data = st_audiorec()
+    if wav_audio_data is not None:
+        text = transcribe(wav_audio_data)
         st.write(text)
 
     with st.expander("Edit Prompt"):
         prompt = st.text_area("Prompt",  height=150, value=default_prompt)
 
     submit = st.button("Organize")
+
+
 with col2:
     if submit:
         response = get_response(input_prompt=prompt, transcript=input_text)
         st.subheader("Result is:")
-        st.write(response)
-
-
+        response = f''' {response}''' 
+        st.code(response, language="python")
