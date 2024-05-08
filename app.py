@@ -4,26 +4,10 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-from st_audiorec import st_audiorec
-import whisper
-model = whisper.load_model("base")
+from whisper import whisper_stt
 
-
-def transcribe(audio):
-    audio = whisper.load_audio(audio)
-    audio = whisper.pad_or_trim(audio)
-
-    mel = whisper.log_mel_spectrogram(audio).to(model.device)
-
-    _, probs = model.detect_language(mel)
-    st.write(f"Detected language: {max(probs, key=probs.get)}")
-
-    options = whisper.DecodingOptions()
-    result = whisper.decode(model, mel, options)
-    return result.text
 
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
-
 def get_response(input_prompt, transcript):
     model = genai.GenerativeModel('gemini-pro')
     response = model.generate_content(input_prompt + transcript)
@@ -34,6 +18,7 @@ st.set_page_config("Text Organiser",layout='wide')
 st.header("Text Organiser")
 
 col1, col2 = st.columns(2)
+
 default_prompt=""" You are an AI assistant that helps summarize doctor and patient conversations in a SOP format like below:
 
 Subjective. The subjective part details the observation of a health care provider to a patient. This could also be the observations that are verbally expressed by the patient. some examples could be answers to questions like:
@@ -63,12 +48,10 @@ The SOAP note must be concise and well-written.
 Medical terminologies and jargon are allowed in the SOAP note.  """
 with col1:
     input_text = st.text_area("Give me the unorganised text",  height=150)
-    
-    wav_audio_data = st_audiorec()
-    if wav_audio_data is not None:
-        text = transcribe(wav_audio_data)
-        st.write(text)
-
+    text =  whisper_stt(openai_api_key=os.getenv('OPENAI_API_KEY'), language = 'en')  # If you don't pass an API key, the function will attempt to load a .env file in the current directory and retrieve it as an environment variable : 'OPENAI_API_KEY'.
+    st.write(text)
+    if text:
+        input_text+= text    
     with st.expander("Edit Prompt"):
         prompt = st.text_area("Prompt",  height=150, value=default_prompt)
 

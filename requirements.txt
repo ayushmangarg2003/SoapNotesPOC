@@ -1,5 +1,6 @@
 streamlit
 google-generativeai
 python-dotenv
-streamlit-audiorec
 openai-whisper
+streamlit_mic_recorder
+openai
