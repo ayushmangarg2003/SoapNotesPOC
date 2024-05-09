@@ -4,3 +4,4 @@ python-dotenv
 openai-whisper
 streamlit_mic_recorder
 openai
+clipboard

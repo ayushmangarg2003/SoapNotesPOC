@@ -3,9 +3,9 @@ import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 load_dotenv()
+import clipboard
 
 from whisper import whisper_stt
-
 
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 def get_response(input_prompt, transcript):
@@ -13,6 +13,12 @@ def get_response(input_prompt, transcript):
     response = model.generate_content(input_prompt + transcript)
     return response.text
 
+def organize_transcribe(transcribe):
+    prompt = "You are give unorganised conversation between a doctor and a patient. You have to label them properly"
+    model = genai.GenerativeModel('gemini-pro')
+    response = model.generate_content(prompt + transcribe)
+    return response.text
+    
 # App
 st.set_page_config("Text Organiser",layout='wide')
 st.header("Text Organiser")
@@ -46,10 +52,14 @@ Plan. The plan refers to the treatment that the patient need or advised by the d
 The SOAP note must be concise and well-written. 
 
 Medical terminologies and jargon are allowed in the SOAP note.  """
+
 with col1:
     input_text = st.text_area("Give me the unorganised text",  height=150)
-    text =  whisper_stt(openai_api_key=os.getenv('OPENAI_API_KEY'), language = 'en')  # If you don't pass an API key, the function will attempt to load a .env file in the current directory and retrieve it as an environment variable : 'OPENAI_API_KEY'.
+    
+    text =  whisper_stt(openai_api_key=os.getenv('OPENAI_API_KEY'), language = 'en')  
+    text = organize_transcribe(text)    
     st.write(text)
+    
     if text:
         input_text+= text    
     with st.expander("Edit Prompt"):
@@ -61,6 +71,7 @@ with col1:
 with col2:
     if submit:
         response = get_response(input_prompt=prompt, transcript=input_text)
-        st.subheader("Result is:")
-        response = f''' {response}''' 
-        st.code(response, language="python")
+        response = f''' {response}'''
+        result = st.text_area(value=response, label="Result", height=320)
+        clipboard.copy(result)
+        st.toast("Copied To Clipboard")
