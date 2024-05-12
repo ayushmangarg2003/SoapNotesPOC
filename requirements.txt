@@ -2,6 +2,6 @@ streamlit
 google-generativeai
 python-dotenv
 openai-whisper
-streamlit_mic_recorder
 openai
-clipboard
+st-copy-to-clipboard
+joblib

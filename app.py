@@ -1,13 +1,12 @@
-import streamlit as st 
-import google.generativeai as genai
-import os
 from dotenv import load_dotenv
 load_dotenv()
-import clipboard
+import os
+import time
+import joblib
+import streamlit as st 
 from whisper import whisper_stt
-
+import google.generativeai as genai
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
-
 
 
 default_prompt=""" You are an AI assistant that helps summarize doctor and patient conversations in a SOP format like below:
@@ -32,12 +31,12 @@ Plan. The plan refers to the treatment that the patient need or advised by the d
 The SOAP note must be concise and well-written. 
 Medical terminologies and jargon are allowed in the SOAP note.  """
 
+prompt_to_label_speech = """You are give unorganised conversation between a doctor and a patient. You have to label them properly"""
+
 def get_response(input_prompt, transcript):
     model = genai.GenerativeModel('gemini-pro')
     response = model.generate_content(input_prompt + transcript)
     return response.text
-
-prompt_to_label_speech = """You are give unorganised conversation between a doctor and a patient. You have to label them properly"""
 
 def organize_transcribe(prompt, transcript):
     model = genai.GenerativeModel('gemini-pro')
@@ -67,11 +66,30 @@ with col1:
 
     submit = st.button("Organize")
 
-
 with col2:
     if submit:
         response = get_response(input_prompt=prompt_by_user, transcript=input_text)
         response = f''' {response}'''
-        result = st.text_area(value=response, label="Result", height=320)
-        clipboard.copy(result)
-        st.toast("Copied To Clipboard")
+        result = st.markdown(response)
+
+new_chat_id = f'{time.time()}'
+past_chats = {}
+
+with st.sidebar:
+    st.write('# Past Chats')
+    if st.session_state.get('chat_id') is None:
+        st.session_state.chat_id = st.selectbox(
+            label='Pick a past chat',
+            options=[new_chat_id] + list(past_chats.keys()),
+            format_func=lambda x: past_chats.get(x, 'New Chat'),
+            placeholder='_',
+        )
+    else:
+        st.session_state.chat_id = st.selectbox(
+            label='Pick a past chat',
+            options=[new_chat_id, st.session_state.chat_id] + list(past_chats.keys()),
+            index=1,
+            format_func=lambda x: past_chats.get(x, 'New Chat' if x != st.session_state.chat_id else st.session_state.chat_title),
+            placeholder='_',
+        )
+    st.session_state.chat_title = f'ChatSession-{st.session_state.chat_id}'
