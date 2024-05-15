@@ -2,6 +2,3 @@ streamlit
 google-generativeai
 python-dotenv
 openai-whisper
-openai
-st-copy-to-clipboard
-joblib
