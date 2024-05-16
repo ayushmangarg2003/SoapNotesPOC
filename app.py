@@ -2,17 +2,18 @@ import os
 import time
 import streamlit as st 
 from constants import default_prompt,prompt_to_label_speech 
-import google.generativeai as genai # type: ignore
 from whisper import whisper_stt
 from dotenv import load_dotenv #type: ignore
 load_dotenv()
-genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
+from langchain_openai import ChatOpenAI # type: ignore
 
 def get_response(prompt, transcript):
-    model = genai.GenerativeModel('gemini-pro')
-    response = model.generate_content(prompt + transcript)
-    return response.text
-    
+    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0)    
+    openai_prompt = prompt + transcript
+    response = llm.invoke(openai_prompt)
+    return response.content
+
+
 # App
 st.set_page_config("Text Organiser",layout='wide')
 st.header("Text Organiser")

@@ -1,4 +1,6 @@
 streamlit
-google-generativeai
 python-dotenv
 openai-whisper
+langchain
+langchain-core
+langchain-openai
