@@ -1,9 +1,9 @@
-from streamlit_mic_recorder import mic_recorder
-import streamlit as st
-import io
-from openai import OpenAI
-import dotenv
 import os
+import io
+import streamlit as st
+import dotenv
+from streamlit_mic_recorder import mic_recorder # type: ignore
+from openai import OpenAI # type: ignore
 
 
 def whisper_stt(openai_api_key=None, start_prompt="Start recording", stop_prompt="Stop recording", just_once=False, use_container_width=False, language=None, callback=None, args=(), kwargs=None, key=None):
