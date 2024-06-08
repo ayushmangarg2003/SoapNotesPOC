@@ -15,8 +15,8 @@ def get_response(prompt, transcript):
 
 
 # App
-st.set_page_config("Text Organiser",layout='wide')
-st.header("Text Organiser")
+st.set_page_config("SOAP Generator",layout='wide')
+st.header("SOAP Generator")
 
 col1, col2 = st.columns(2)
 

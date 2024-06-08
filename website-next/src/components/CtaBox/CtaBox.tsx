@@ -54,7 +54,7 @@ export const CtaBox = () => {
           mb="8px"
           fontWeight="extrabold"
         >
-          Start making money today.
+          Start today.
         </Heading>
         <Text
           fontSize="16px"
@@ -65,7 +65,7 @@ export const CtaBox = () => {
         >
           Get started with {brandName} today.
           <br />
-          Start making money with your audience.
+          {/* Start making money with your audience. */}
         </Text>
 
         <Stack direction={["column", "column", "column", "row"]} mt="24px">

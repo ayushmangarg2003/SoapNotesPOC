@@ -82,10 +82,10 @@ export const Hero = ({
               backgroundClip="text"
               as="span"
             >
-              Make money
+              We'll Do
             </Text>
             <br />
-            while you sleep
+            The SOAP Note
           </Heading>
           <Text
             textAlign={["center", "center", "center", "left"]}
@@ -95,7 +95,7 @@ export const Hero = ({
             fontSize={["14px", "15px", "18px", "20px"]}
             maxW={["70%", "70%", "70%", "560px"]}
           >
-            Launch faster and start making money today.
+            Freed listens, transcribes, and writes medical documentation for you.
           </Text>
 
           <Flex flexDir="column" alignItems="flex-start" px="16px" mt="24px">

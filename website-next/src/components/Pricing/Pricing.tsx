@@ -31,7 +31,7 @@ export const Pricing = () => {
           fontWeight="extrabold"
           textAlign="center"
         >
-          Start making money today.
+          Start today.
         </Heading>
         <Flex
           alignItems="center"

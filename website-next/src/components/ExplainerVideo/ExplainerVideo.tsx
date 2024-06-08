@@ -13,7 +13,7 @@ export const ExplainerVideo = () => {
           fontWeight={600}
           px="48px"
         >
-          Watch how to make money in ~2 minutes
+          Watch How Freed Works
         </Text>
 
         <Flex
