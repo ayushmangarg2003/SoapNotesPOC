@@ -20,4 +20,4 @@ Plan. The plan refers to the treatment that the patient need or advised by the d
 The SOAP note must be concise and well-written. 
 Medical terminologies and jargon are allowed in the SOAP note.  """
 
-prompt_to_label_speech = """Label this conversation"""
+prompt_to_label_speech = """"""

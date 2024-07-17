@@ -32,8 +32,9 @@ with col1:
 
     # Organize and label the transcript
     if transcript_by_whisper:
-        text = get_response(prompt_to_label_speech, transcript_by_whisper)    
-        st.write(text)
+        # text = get_response(prompt_to_label_speech, transcript_by_whisper)    
+        # st.write(text)
+        st.write(transcript_by_whisper)
     
     # Adding Transcript to user text
     if len(text)>0:
