@@ -12,6 +12,7 @@ import EmailProvider from "next-auth/providers/email";
 // more providers at https://next-auth.js.org/providers
 
 export const authOptions: AuthOptions = {
+  //@ts-expect-error
   adapter: PrismaAdapter(prismaClient),
   providers: [
     EmailProvider({

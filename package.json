@@ -6,6 +6,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "dependencies": {
+    "@extension": "workspace:*"
+  },
   "scripts": {},
   "author": "",
   "license": "ISC"
