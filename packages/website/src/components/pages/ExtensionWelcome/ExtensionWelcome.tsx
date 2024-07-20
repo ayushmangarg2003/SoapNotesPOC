@@ -13,9 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { Brand } from "@extension/src/components/atoms/Brand/Brand";
-import { theme } from "@extension//src/components/theme";
-import { extensionName } from "@extension//src/config";
+import { Brand } from "extension/src/components/atoms/Brand/Brand";
+import { theme } from "extension//src/components/theme";
+import { extensionName } from "extension//src/config";
 
 const Triangle = () => {
   return (
