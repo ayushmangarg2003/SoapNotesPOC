@@ -13,9 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { Brand } from "extension/src/components/atoms/Brand/Brand";
-import { theme } from "extension/src/components/theme";
-import { extensionName } from "extension//src/config";
+// import { Brand } from "extension/src/components/atoms/Brand/Brand";
+// import { theme } from "extension/src/components/theme";
+// import { extensionName } from "extension//src/config";
 
 const Triangle = () => {
   return (
@@ -26,7 +26,7 @@ const Triangle = () => {
         borderLeft="5px solid transparent"
         borderRight="5px solid transparent"
         borderBottom="5px solid black"
-        borderBottomColor={theme.box.bgColor}
+      // borderBottomColor={theme.box.bgColor}
       />
     </Flex>
   );
@@ -74,11 +74,11 @@ export const ExtensionWelcome = () => {
                   alignItems="center"
                   justifyContent="center"
                   flexDir="column"
-                  color={theme.box.color}
-                  bgColor={theme.box.bgColor}
-                  boxShadow={theme.box.boxShadow}
-                  padding="32px"
-                  fontFamily={theme.styles.fontFamily}
+                  // color={theme.box.color}
+                  // bgColor={theme.box.bgColor}
+                  // boxShadow={theme.box.boxShadow}
+                  // padding="32px"
+                  // fontFamily={theme.styles.fontFamily}
                   borderRadius="8px"
                   zIndex={10}
                 >
@@ -94,10 +94,10 @@ export const ExtensionWelcome = () => {
                     w="100%"
                   >
                     <Text color="#14202E" fontWeight="semibold" fontSize="16px">
-                      You successfully installed {extensionName}!
+                      {/* You successfully installed {extensionName}! */}
                     </Text>
                     <Flex w="40px" my="24px">
-                      <Brand />
+                      {/* <Brand /> */}
                     </Flex>
                     <Text>Pin the extension for easy access:</Text>
                   </Flex>
