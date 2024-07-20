@@ -5,6 +5,8 @@ import { Readable } from "stream";
 import { headers } from "next/headers";
 import { prismaClient } from "@/prisma/db";
 
+export const runtime = 'edge';
+
 export async function POST(request: Request) {
   const body = await rawBody(Readable.from(Buffer.from(await request.text())));
   const headersList = headers();

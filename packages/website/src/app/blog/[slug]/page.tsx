@@ -26,6 +26,8 @@ import { TweetEmbed } from "@/components/Blog/Article/TweetEmbed";
 import { getOpenGraph } from "@/components/OpenGraph/OpenGraph";
 import { getSEOTags } from "@/components/SEOTags/SEOTags";
 
+export const runtime = 'edge';
+
 const getBlogData = async (slug: string) => {
   const { content, data } = api.getRawArticleBySlug(slug);
   const mdxSource = await compileMDX({

@@ -5,6 +5,8 @@ import LemonSqueezy from "@lemonsqueezy/lemonsqueezy.js";
 import { prismaClient } from "@/prisma/db";
 import { authOptions } from "@/config/auth";
 
+export const runtime = 'edge';
+
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
 

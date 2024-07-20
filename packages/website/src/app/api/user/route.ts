@@ -10,6 +10,8 @@ export type UserResponse = {
   user: User;
 };
 
+export const runtime = 'edge';
+
 export async function GET(): Promise<NextResponse<UserResponse | ApiError>> {
   const session = await getServerSession(authOptions);
 

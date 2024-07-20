@@ -4,6 +4,8 @@ import qs from "qs";
 // import { createLoopsContact } from "@/libs/loops";
 // import { addMailChimpListMember } from "@/libs/mailchimp";
 
+export const runtime = 'edge';
+
 export async function POST(req: Request) {
   const body = await req.json();
   const email = body.email;

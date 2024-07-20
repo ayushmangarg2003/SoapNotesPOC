@@ -15,6 +15,7 @@ export const metadata: Metadata = getSEOTags({
   title: landingPageTitle,
   description: landingPageDescription,
 });
+export const runtime = 'edge';
 
 export default function Home() {
   return (

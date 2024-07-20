@@ -7,6 +7,8 @@ import { NextRequest, NextResponse } from "next/server";
 import rawBody from "raw-body";
 import { Readable } from "stream";
 
+export const runtime = 'edge';
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
