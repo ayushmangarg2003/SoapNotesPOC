@@ -4,23 +4,30 @@ import { Section } from "../atoms/Section/Section";
 const featuresList: Omit<FeatureProps, "showCta">[] = [
   {
     category: "Productivity",
-    title: "After Visit Summary",
+    title: "Documentation Automation",
     description:
-      "Written in your style and ready the moment the visit is over. Just hand it over to your patient.",
+      "1. Scribe generates 70% of progress note content within minutes, reducing documentation time by over 50%.",
     imageUrl: "https://placehold.co/600x400",
   },
   {
     category: "Leads generation",
-    title: "SOAP Note",
+    title: "Session Intelligence",
     description:
-      "Generated based on medical guidelines and best practice templates. Review and approve.",
+      "User-friendly analytics help providers assess their performance and improve care quality.",
     imageUrl: "https://placehold.co/600x400",
   },
   {
     category: "Leads generation",
-    title: "Self Learning",
+    title: "Leadership Reporting",
     description:
-      "With every edit, Freed learns your style, format, and templates. Like a human scribe would.",
+      "Detailed dashboards provide unprecedented visibility into staff activity, caseloads, and performance metrics.",
+    imageUrl: "https://placehold.co/600x400",
+  },
+  {
+    category: "Productivity",
+    title: "Seamless Integration",
+    description:
+      "Embeds directly into existing EHR workflows for both in-person and telehealth sessions.",
     imageUrl: "https://placehold.co/600x400",
   },
 ];
