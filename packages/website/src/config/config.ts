@@ -1,6 +1,6 @@
-export const brandName = "Freed";
+export const brandName = "Genesis";
 export const landingPageTitle = "We'll Do The SOAP Note";
-export const landingPageDescription = "Freed listens, transcribes, and writes medical documentation for you.";
+export const landingPageDescription = "Genesis listens, transcribes, and writes medical documentation for you.";
 export const websiteUrl = "http://localhost:3000";
 export const supportEmail = "support@email.com";
 export const openGraphImageUrl = "https://myapp.com/images/og-image.jpg";
