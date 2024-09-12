@@ -7,8 +7,6 @@ from dotenv import load_dotenv #type: ignore
 load_dotenv()
 from langchain_openai import ChatOpenAI # type: ignore
 
-OPENAI_API_KEY='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'
-
 def get_response(prompt, transcript):
     llm = ChatOpenAI(model="gpt-4o", temperature=0)    
     openai_prompt = prompt + transcript
@@ -27,8 +25,8 @@ with col1:
     input_by_user = st.text_area("Give me the unorganised text",  height=150)
     
     # Audio that is recorded
-    transcript_by_whisper =  whisper_stt(openai_api_key=OPENAI_API_KEY, language = 'en')  
-    # transcript_by_whisper =  whisper_stt(openai_api_key=os.getenv('OPENAI_API_KEY'), language = 'en')  
+    # transcript_by_whisper =  whisper_stt(openai_api_key=OPENAI_API_KEY, language = 'en')  
+    transcript_by_whisper =  whisper_stt(openai_api_key=os.getenv('OPENAI_API_KEY'), language = 'en')  
 
     # Variable to audio transcript
     text=""
